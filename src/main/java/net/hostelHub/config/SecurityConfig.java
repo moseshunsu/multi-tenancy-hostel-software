@@ -33,7 +33,8 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests( requests -> requests
-                        .requestMatchers("api/v1/users/**").permitAll())
+                        .requestMatchers("api/v1/users/**").permitAll()
+                        .requestMatchers("api/v1/tenants/**").permitAll())
                         .formLogin(Customizer.withDefaults())
                         .httpBasic(Customizer.withDefaults());
 
