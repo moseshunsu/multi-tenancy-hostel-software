@@ -1,9 +1,6 @@
 package net.hostelHub.dto.tenant;
 
 import lombok.*;
-import net.hostelHub.utils.School;
-import net.hostelHub.utils.State;
-import net.hostelHub.utils.Type;
 
 @Getter
 @Setter

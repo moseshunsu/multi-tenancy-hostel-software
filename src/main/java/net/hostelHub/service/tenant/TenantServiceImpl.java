@@ -140,8 +140,9 @@ public class TenantServiceImpl implements TenantService {
                 .stream()
                 .filter(hostelProperty ->
                             hostelPropertyRequest.getHostelName().equalsIgnoreCase(hostelProperty.getHostelName()) &&
-                            School.valueOf(hostelPropertyRequest.getSchoolName()).equals(hostelProperty.getSchoolName()) &&
-                            hostelPropertyRequest.getUniqueCode().equalsIgnoreCase(hostelProperty.getUniqueCode()))
+                            hostelPropertyRequest.getUniqueCode().equalsIgnoreCase(hostelProperty.getUniqueCode()) &&
+                            School.valueOf(hostelPropertyRequest.getSchoolName()).equals(hostelProperty.getSchoolName())
+                )
                 .findFirst()
                 .orElseThrow( () -> new NoSuchElementException("No such hostel found; check hostel name and school"))
         );

@@ -8,6 +8,9 @@ public class ResponseUtils {
     public static final String SUCCESS_CODE = "002";
     public static final String PROPERTY_REGISTER_SUCCESS_CODE = "003";
     public static final String PROPERTY_EXISTS_CODE = "004";
+    public static final String HOSTEL_NOT_FOUND_CODE = "005";
+    public static final String ROOM_TYPE_EXISTS_CODE = "006";
+    public static final String ROOM_EXISTS_CODE = "007";
     public static final String USER_EXISTS_MESSAGE = "User with provided email or username already exists!";
     public  static final int LENGTH_OF_TENANT_CODE = 6;
     public  static final int LENGTH_OF_OCCUPANT_CODE = 10;
@@ -19,8 +22,11 @@ public class ResponseUtils {
     public static final String PROPERTY_EXISTS_MESSAGE = "Property with the same property and school name already " +
             "exists";
     public static final String PHOTO_UPDATE_MESSAGE = "Photo url successfully updated!";
-
-
+    public static final String ROOM_TYPE_ENTRY_SUCCESS = "Room type successfully entered";
+    public static final String ROOM_ENTRY_SUCCESS = "Room successfully entered";
+    public static final String HOSTEL_NOT_FOUND_MESSAGE = "Hostel with associated school name not found";
+    public static final String ROOM_TYPE_EXISTS_MESSAGE = "Room type already exists";
+    public static final String ROOM_EXISTS_MESSAGE = "Room with such room number already exists";
     public static String generateClientCode(int length) {
         String clientCode = "";
         int x;

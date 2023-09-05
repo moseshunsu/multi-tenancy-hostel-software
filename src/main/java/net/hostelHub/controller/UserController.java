@@ -3,7 +3,7 @@ package net.hostelHub.controller;
 import net.hostelHub.dto.Response;
 import net.hostelHub.dto.UserRequest;
 import net.hostelHub.entity.User;
-import net.hostelHub.service.UserService;
+import net.hostelHub.service.user.UserService;
 import net.hostelHub.utils.ResponseUtils;
 import net.hostelHub.utils.Role;
 import org.springframework.beans.factory.annotation.Autowired;

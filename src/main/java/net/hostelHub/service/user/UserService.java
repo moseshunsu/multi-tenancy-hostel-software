@@ -1,4 +1,4 @@
-package net.hostelHub.service;
+package net.hostelHub.service.user;
 
 import net.hostelHub.dto.Response;
 import net.hostelHub.dto.UserRequest;

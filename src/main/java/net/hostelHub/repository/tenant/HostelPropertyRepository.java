@@ -7,5 +7,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface HostelPropertyRepository extends JpaRepository<HostelProperty, Long> {
-    List<HostelProperty> findByHostelName(String name);
 }

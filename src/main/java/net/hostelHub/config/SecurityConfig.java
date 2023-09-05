@@ -34,7 +34,8 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests( requests -> requests
                         .requestMatchers("api/v1/users/**").permitAll()
-                        .requestMatchers("api/v1/tenants/**").permitAll())
+                        .requestMatchers("api/v1/tenants/**").permitAll()
+                        .requestMatchers("api/v1/rooms/**").permitAll())
                         .formLogin(Customizer.withDefaults())
                         .httpBasic(Customizer.withDefaults());
 
