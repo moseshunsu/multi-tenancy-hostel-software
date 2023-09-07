@@ -11,6 +11,8 @@ public class ResponseUtils {
     public static final String HOSTEL_NOT_FOUND_CODE = "005";
     public static final String ROOM_TYPE_EXISTS_CODE = "006";
     public static final String ROOM_EXISTS_CODE = "007";
+    public static final String BOOKING_SUCCESS_CODE = "008";
+    public static final String ROOM_NOT_FOUND_CODE = "009";
     public static final String USER_EXISTS_MESSAGE = "User with provided email or username already exists!";
     public  static final int LENGTH_OF_TENANT_CODE = 6;
     public  static final int LENGTH_OF_OCCUPANT_CODE = 10;
@@ -27,6 +29,9 @@ public class ResponseUtils {
     public static final String HOSTEL_NOT_FOUND_MESSAGE = "Hostel with associated school name not found";
     public static final String ROOM_TYPE_EXISTS_MESSAGE = "Room type already exists";
     public static final String ROOM_EXISTS_MESSAGE = "Room with such room number already exists";
+    public static final String BOOKING_SUCCESS_MESSAGE = "Congrats, room successfully booked pending approval from " +
+            "hostel admin after successful payment";
+    public static final String ROOM_NOT_FOUND_MESSAGE = "Room not found";
     public static String generateClientCode(int length) {
         String clientCode = "";
         int x;

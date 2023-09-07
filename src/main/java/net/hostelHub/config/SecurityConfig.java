@@ -35,7 +35,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests( requests -> requests
                         .requestMatchers("api/v1/users/**").permitAll()
                         .requestMatchers("api/v1/tenants/**").permitAll()
-                        .requestMatchers("api/v1/rooms/**").permitAll())
+                        .requestMatchers("api/v1/rooms/**").permitAll()
+                        .requestMatchers("api/v1/bookings/**").permitAll())
                         .formLogin(Customizer.withDefaults())
                         .httpBasic(Customizer.withDefaults());
 

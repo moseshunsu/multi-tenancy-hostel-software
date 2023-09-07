@@ -1,6 +1,7 @@
 package net.hostelHub.service.room;
 
-import net.hostelHub.dto.*;
+import net.hostelHub.dto.Data;
+import net.hostelHub.dto.Response;
 import net.hostelHub.dto.room.RoomRequest;
 import net.hostelHub.dto.room.RoomResponseDto;
 import net.hostelHub.dto.room.RoomTypeRequest;
@@ -12,6 +13,7 @@ import net.hostelHub.repository.room.RoomTypeRepository;
 import net.hostelHub.repository.tenant.HostelPropertyRepository;
 import net.hostelHub.utils.ResponseUtils;
 import net.hostelHub.utils.RoomStatus;
+import net.hostelHub.utils.School;
 import net.hostelHub.utils.Sex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -174,10 +176,13 @@ public class RoomServiceImpl implements RoomService{
                 .findFirst();
 
         if (roomOptional.isPresent()) {
+
             Room room = roomOptional.get();
             RoomResponseDto roomDetails = RoomResponseDto.builder()
                     .hostelName(room.getRoomType().getHostelName())
                     .schoolName(room.getRoomType().getSchoolName())
+                    .uniqueCode(room.getRoomType().getUniqueCode())
+                    .hostelContactMail(hostelContactMail(schoolName, hostelName))
                     .roomStatus(room.getRoomStatus().name())
                     .pricePerBed(room.getRoomType().getPricePerBed())
                     .description(room.getRoomType().getDescription())
@@ -206,6 +211,8 @@ public class RoomServiceImpl implements RoomService{
                 room -> RoomResponseDto.builder()
                         .hostelName(room.getRoomType().getHostelName())
                         .schoolName(room.getRoomType().getSchoolName())
+                        .uniqueCode(room.getRoomType().getUniqueCode())
+                        .hostelContactMail(hostelContactMail(schoolName, hostelName))
                         .roomStatus(room.getRoomStatus().name())
                         .pricePerBed(room.getRoomType().getPricePerBed())
                         .description(room.getRoomType().getDescription())
@@ -216,7 +223,16 @@ public class RoomServiceImpl implements RoomService{
                         .build()
         ).toList();
 
-        return ResponseEntity.ok().body(rooms);
+        return !rooms.isEmpty() ? ResponseEntity.ok().body(rooms) : ResponseEntity.noContent().build();
+
+    }
+
+    private String hostelContactMail(String schoolName, String hostelName) {
+
+        return hostelPropertyRepository.findAll().stream().filter(
+                hostelProperty -> hostelProperty.getHostelName().equalsIgnoreCase(hostelName) &&
+                                    hostelProperty.getSchoolName().equals(School.valueOf(schoolName))
+        ).findFirst().get().getContactEmail();
 
     }
 
