@@ -58,7 +58,7 @@ public class TenantServiceImpl implements TenantService {
                 .filter(user -> user.getUniqueCode().equalsIgnoreCase(hostelPropertyRequest.getUniqueCode()))
                 .findAny()
                 .orElseThrow(() -> new UsernameNotFoundException(
-                                            "User with this code not found:" + hostelPropertyRequest.getUniqueCode()
+                                            "User with this code not found: " + hostelPropertyRequest.getUniqueCode()
                 ));
 
         HostelProperty property = new HostelProperty();

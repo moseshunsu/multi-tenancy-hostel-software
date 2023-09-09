@@ -1,11 +1,7 @@
 package net.hostelHub.entity.tenant;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import net.hostelHub.utils.School;
 import net.hostelHub.utils.State;
 import net.hostelHub.utils.Type;
@@ -21,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 @Table(name = "hostel_properties")
 public class HostelProperty {
 
@@ -57,6 +54,7 @@ public class HostelProperty {
     @Column(name = "contact_phone")
     private String contactPhone;
 
+    @Builder.Default
     @OneToMany(mappedBy = "hostelProperty", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PropertyPhoto> photos = new ArrayList<>();
 
