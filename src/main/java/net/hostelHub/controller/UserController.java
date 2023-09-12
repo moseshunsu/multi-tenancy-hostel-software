@@ -23,15 +23,15 @@ public class UserController {
                                                      Role role,
                                                      Integer lengthOfCode,
                                                      HttpServletRequest request) {
-        return userService.registerUser(userRequest, Role.ROLE_OCCUPANT, ResponseUtils.LENGTH_OF_OCCUPANT_CODE, request);
+        return userService.registerUser(userRequest, Role.OCCUPANT, ResponseUtils.LENGTH_OF_OCCUPANT_CODE, request);
     }
 
-    @PostMapping("/sign-up/tenants")
-    public ResponseEntity<Response> registerTenant(@RequestBody UserRequest userRequest,
+    @PostMapping("/sign-up/managers")
+    public ResponseEntity<Response> registerManager(@RequestBody UserRequest userRequest,
                                                    Role role,
                                                    Integer lengthOfCode,
                                                    HttpServletRequest request) {
-        return userService.registerUser(userRequest, Role.ROLE_TENANT, ResponseUtils.LENGTH_OF_TENANT_CODE, request);
+        return userService.registerUser(userRequest, Role.MANAGER, ResponseUtils.LENGTH_OF_TENANT_CODE, request);
     }
 
     @GetMapping("/{emailOrUsername}")
