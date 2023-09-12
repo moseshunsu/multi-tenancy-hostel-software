@@ -13,4 +13,5 @@ public class AuthResponse {
     private String token;
     private String uniqueCode;
     private String email;
+    private String username;
 }

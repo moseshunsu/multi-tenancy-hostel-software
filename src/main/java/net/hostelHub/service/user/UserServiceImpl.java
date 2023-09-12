@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseEntity<Response> registerUser(UserRequest userRequest, Role role, Integer lengthOfCode,
-                                                 final HttpServletRequest request) {
+                                                     final HttpServletRequest request) {
 
         boolean userExists = userRepository.findAll().stream()
                 .anyMatch(user -> userRequest.getEmail().equalsIgnoreCase(user.getEmail()) ||
@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
                 .build();
 
         User saveduser = userRepository.save(user);
-        publisher.publishEvent(new RegistrationCompleteEvent(user, applicationUrl(request)));
+        publisher.publishEvent(new RegistrationCompleteEvent(saveduser, applicationUrl(request)));
 
         return successfulResponse(saveduser);
     }

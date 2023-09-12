@@ -2,11 +2,11 @@ package net.hostelHub.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import net.hostelHub.entity.token.Token;
 import net.hostelHub.utils.Role;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
@@ -49,7 +49,12 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @Builder.Default
     private boolean isEnabled = false;
+
+    @OneToMany(mappedBy = "user")
+    @ToString.Exclude
+    private List<Token> tokens;
 
     @CreationTimestamp
     @Column(name = "created_at")
@@ -71,7 +76,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return username;
     }
 
     @Override
