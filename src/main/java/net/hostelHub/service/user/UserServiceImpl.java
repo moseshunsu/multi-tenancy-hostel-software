@@ -1,28 +1,32 @@
 package net.hostelHub.service.user;
 
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
 import net.hostelHub.dto.Data;
 import net.hostelHub.dto.Response;
 import net.hostelHub.dto.UserRequest;
 import net.hostelHub.entity.User;
+import net.hostelHub.event.RegistrationCompleteEvent;
 import net.hostelHub.repository.UserRepository;
 import net.hostelHub.utils.ResponseUtils;
 import net.hostelHub.utils.Role;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final ApplicationEventPublisher publisher;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @Override
-    public ResponseEntity<Response> registerUser(UserRequest userRequest, Role role, Integer lengthOfCode) {
+    public ResponseEntity<Response> registerUser(UserRequest userRequest, Role role, Integer lengthOfCode,
+                                                 final HttpServletRequest request) {
 
         boolean userExists = userRepository.findAll().stream()
                 .anyMatch(user -> userRequest.getEmail().equalsIgnoreCase(user.getEmail()) ||
@@ -47,16 +51,20 @@ public class UserServiceImpl implements UserService {
                 .build();
 
         User saveduser = userRepository.save(user);
+        publisher.publishEvent(new RegistrationCompleteEvent(user, applicationUrl(request)));
 
         return successfulResponse(saveduser);
     }
-
 
     @Override
     public User fetchUser(String emailOrUsername) {
         return userRepository.existsByUsernameOrEmail(emailOrUsername, emailOrUsername)
                 ? userRepository.findByUsernameOrEmail(emailOrUsername, emailOrUsername).get()
                 : null;
+    }
+
+    public String applicationUrl(HttpServletRequest request) {
+        return "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
     }
 
     private ResponseEntity<Response> successfulResponse(User user) {
@@ -68,7 +76,7 @@ public class UserServiceImpl implements UserService {
 
         return ResponseEntity.ok(Response.builder()
                 .responseCode(ResponseUtils.SUCCESS_CODE)
-                .responseMessage(ResponseUtils.FETCHED_MESSAGE)
+                .responseMessage(ResponseUtils.USER_REGISTRATION_MESSAGE)
                 .data(userData)
                 .build());
     }

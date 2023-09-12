@@ -55,7 +55,7 @@ public class TenantServiceTests {
                 .email("moses@gmail.com")
                 .phoneNumber("1234567890")
                 .password("12345")
-                .role(Role.TENANT)
+                .role(Role.ROLE_TENANT)
                 .build();
 
         // Create a HostelPropertyRequest to register a hostel property

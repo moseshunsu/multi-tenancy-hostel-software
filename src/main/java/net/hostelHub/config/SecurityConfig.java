@@ -2,6 +2,7 @@ package net.hostelHub.config;
 
 import net.hostelHub.filter.JwtAuthenticationFilter;
 import net.hostelHub.service.security.UserDetailsServiceImpl;
+import net.hostelHub.utils.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,9 +35,11 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests( requests -> requests
                         .requestMatchers("api/v1/users/**").permitAll()
+                        .requestMatchers("api/v1/verify/**").permitAll()
                         .requestMatchers("api/v1/tenants/**").permitAll()
                         .requestMatchers("api/v1/rooms/**").permitAll()
-                        .requestMatchers("api/v1/bookings/**").permitAll())
+                        .requestMatchers("api/v1/bookings/**").permitAll()
+                        .requestMatchers("api/v1/demo").hasRole("TENANT"))
                         .formLogin(Customizer.withDefaults())
                         .httpBasic(Customizer.withDefaults());
 

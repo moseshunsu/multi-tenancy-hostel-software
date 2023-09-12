@@ -1,5 +1,6 @@
 package net.hostelHub.utils;
 
 public enum Role {
-    TENANT, OCCUPANT
+    ROLE_OCCUPANT,
+    ROLE_TENANT
 }

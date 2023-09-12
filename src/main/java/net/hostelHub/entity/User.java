@@ -8,8 +8,14 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
-@Entity @Getter @Setter @ToString @Table(name = "users")
-@AllArgsConstructor @NoArgsConstructor @Builder
+@Getter
+@Setter
+@ToString
+@Builder
+@Entity
+@Table(name = "users")
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     @Id
@@ -37,6 +43,8 @@ public class User {
     @Column(name = "roles")
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    private boolean isEnabled = false;
 
     @CreationTimestamp
     @Column(name = "created_at")

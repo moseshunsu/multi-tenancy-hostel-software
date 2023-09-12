@@ -1,5 +1,6 @@
 package net.hostelHub.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import net.hostelHub.dto.Response;
 import net.hostelHub.dto.UserRequest;
 import net.hostelHub.entity.User;
@@ -19,14 +20,18 @@ public class UserController {
 
     @PostMapping("/sign-up")
     public ResponseEntity<Response> registerOccupant(@RequestBody UserRequest userRequest,
-                                                     Role role, Integer lengthOfCode) {
-        return userService.registerUser(userRequest, Role.OCCUPANT, ResponseUtils.LENGTH_OF_OCCUPANT_CODE);
+                                                     Role role,
+                                                     Integer lengthOfCode,
+                                                     HttpServletRequest request) {
+        return userService.registerUser(userRequest, Role.ROLE_OCCUPANT, ResponseUtils.LENGTH_OF_OCCUPANT_CODE, request);
     }
 
     @PostMapping("/sign-up/tenants")
     public ResponseEntity<Response> registerTenant(@RequestBody UserRequest userRequest,
-                                                                Role role, Integer lengthOfCode) {
-        return userService.registerUser(userRequest, Role.TENANT, ResponseUtils.LENGTH_OF_TENANT_CODE);
+                                                   Role role,
+                                                   Integer lengthOfCode,
+                                                   HttpServletRequest request) {
+        return userService.registerUser(userRequest, Role.ROLE_TENANT, ResponseUtils.LENGTH_OF_TENANT_CODE, request);
     }
 
     @GetMapping("/{emailOrUsername}")
