@@ -42,18 +42,34 @@ public class RegistrationCompleteEventListener implements ApplicationListener<Re
     }
 
     public void sendVerificationEmail(String url) {
+        String subject = "Email Verification";
         String mailContent = "<p> Hi, " + user.getName() + ", </p>" +
                 "<p>Thank you for registering with us, " +
                 "Please, follow the link below to complete your registration.</p>" +
                 "<a href=\"" + url + "\">Verify your email to activate your account</a>" +
                 "<p> Thank you <br> Users Registration Portal Service";
 
-        EmailDetails emailDetails = EmailDetails.builder()
+        EmailDetails emailDetails = getEmailDetails(subject, mailContent);
+        emailService.sendMail(emailDetails);
+    }
+
+    public void sendPasswordResetVerificationEmail(String url) {
+        String subject = "Password Reset Request Verification";
+        String mailContent = "<p> Hi, "+ user.getName()+ ", </p>"+
+                "<p><b>You recently requested to reset your password,</b>"+"" +
+                "Please, follow the link below to complete the action.</p>"+
+                "<a href=\"" +url+ "\">Reset password</a>"+
+                "<p> Users Registration Portal Service";
+
+        EmailDetails emailDetails = getEmailDetails(subject, mailContent);
+        emailService.sendMail(emailDetails);
+    }
+
+    private EmailDetails getEmailDetails(String subject, String mailContent) {
+        return EmailDetails.builder()
+                .subject(subject)
                 .recipient(user.getEmail())
                 .messageBody(mailContent)
-                .subject("Email Verification")
                 .build();
-
-        emailService.sendMail(emailDetails);
     }
 }

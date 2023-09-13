@@ -2,8 +2,8 @@ package net.hostelHub.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import net.hostelHub.dto.AuthResponse;
-import net.hostelHub.dto.LoginDto;
+import net.hostelHub.dto.security.AuthResponse;
+import net.hostelHub.dto.security.LoginDto;
 import net.hostelHub.service.security.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

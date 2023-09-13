@@ -7,6 +7,8 @@ import net.hostelHub.entity.User;
 import net.hostelHub.utils.Role;
 import org.springframework.http.ResponseEntity;
 
+import java.util.Optional;
+
 public interface UserService {
 
     ResponseEntity<Response> registerUser(
@@ -17,5 +19,6 @@ public interface UserService {
     );
 
     User fetchUser(String emailOrUsername);
-
+    void changePassword(User user, String newPassword);
+    Optional<User> findByEmail(String email);
 }

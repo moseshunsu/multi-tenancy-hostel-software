@@ -1,4 +1,4 @@
-package net.hostelHub.dto;
+package net.hostelHub.dto.security;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

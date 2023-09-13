@@ -1,4 +1,4 @@
-package net.hostelHub.dto;
+package net.hostelHub.dto.security;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
