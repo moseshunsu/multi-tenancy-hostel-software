@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
                 : null;
     }
 
-    public String applicationUrl(HttpServletRequest request) {
+    public static String applicationUrl(HttpServletRequest request) {
         return "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
     }
 

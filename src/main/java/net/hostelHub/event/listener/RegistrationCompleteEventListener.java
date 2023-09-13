@@ -20,11 +20,12 @@ public class RegistrationCompleteEventListener implements ApplicationListener<Re
     private final VerificationTokenService tokenService;
     private final JavaMailSender mailSender;
     private final EmailService emailService;
+    private User user;
 
     @Override
     public void onApplicationEvent(RegistrationCompleteEvent event) {
         // 1. Get the newly registered user
-        User user = event.getUser();
+        user = event.getUser();
 
         // 2. Create a verification token for the user
         String verificationToken = UUID.randomUUID().toString();
@@ -36,6 +37,11 @@ public class RegistrationCompleteEventListener implements ApplicationListener<Re
         String url = event.getApplicationUrl() + "/api/v1/verify/email?token=" + verificationToken;
 
         // 5. Send the email
+        sendVerificationEmail(url);
+        log.info("Click the link to verify your registration: {}", url);
+    }
+
+    public void sendVerificationEmail(String url) {
         String mailContent = "<p> Hi, " + user.getName() + ", </p>" +
                 "<p>Thank you for registering with us, " +
                 "Please, follow the link below to complete your registration.</p>" +
@@ -49,6 +55,5 @@ public class RegistrationCompleteEventListener implements ApplicationListener<Re
                 .build();
 
         emailService.sendMail(emailDetails);
-        log.info("Click the link to verify your registration: {}", url);
     }
 }

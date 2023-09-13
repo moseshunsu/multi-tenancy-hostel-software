@@ -25,7 +25,7 @@ public class VerificationToken {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
-    private static final int EXPIRATION_TIME = 15;
+    private static final int EXPIRATION_TIME = 1;
 
     @CreationTimestamp
     @Column(name = "created_at")
@@ -44,7 +44,7 @@ public class VerificationToken {
         this.expirationTime = this.getTokenExpirationTime();
     }
 
-    private Date getTokenExpirationTime() {
+    public Date getTokenExpirationTime() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(new Date().getTime());
         calendar.add(Calendar.MINUTE, EXPIRATION_TIME);

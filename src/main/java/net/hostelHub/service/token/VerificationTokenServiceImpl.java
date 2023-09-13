@@ -1,5 +1,6 @@
 package net.hostelHub.service.token;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import net.hostelHub.dto.Data;
 import net.hostelHub.dto.Response;
@@ -12,6 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
+import java.util.UUID;
+
+import static net.hostelHub.service.user.UserServiceImpl.applicationUrl;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +23,7 @@ public class VerificationTokenServiceImpl  implements VerificationTokenService{
 
     private final VerificationTokenRepository tokenRepository;
     private final UserRepository userRepository;
+    private final HttpServletRequest servletRequest;
 
     @Override
     public void saveUserVerificationToken(User user, String token) {
@@ -35,7 +40,7 @@ public class VerificationTokenServiceImpl  implements VerificationTokenService{
         User user = verificationToken.getUser();
         Calendar calendar = Calendar.getInstance();
         if ((verificationToken.getExpirationTime().getTime() - calendar.getTime().getTime()) <= 0)  {
-            tokenRepository.delete(verificationToken);
+//            tokenRepository.delete(verificationToken);
             return "Token already expired";
         }
         user.setEnabled(true);
@@ -45,6 +50,9 @@ public class VerificationTokenServiceImpl  implements VerificationTokenService{
 
     @Override
     public ResponseEntity<Response> verifyEmail(String token) {
+
+        String url = applicationUrl(servletRequest)+"/api/v1/verify/resend-verification-token?token="+token;
+
         VerificationToken verificationToken = tokenRepository.findByToken(token);
         if (verificationToken.getUser().isEnabled()){
             return ResponseEntity.ok().body(
@@ -73,10 +81,10 @@ public class VerificationTokenServiceImpl  implements VerificationTokenService{
                             .build()
             );
         }
-        return ResponseEntity.badRequest().body(
+        return ResponseEntity.ok().body(
                 Response.builder()
                         .responseCode(ResponseUtils.INVALID_TOKEN_CODE)
-                        .responseMessage(ResponseUtils.INVALID_TOKEN_MESSAGE)
+                        .responseMessage("Invalid verification link, <a href=\"" + url + "\"> Get a new verification link. </a>")
                         .data(Data.builder()
                                 .uniqueCode(verificationToken.getUser().getUniqueCode())
                                 .email(verificationToken.getUser().getEmail())
@@ -84,5 +92,14 @@ public class VerificationTokenServiceImpl  implements VerificationTokenService{
                                 .build())
                         .build()
         );
+    }
+
+    @Override
+    public VerificationToken generateNewVerificationToken(String oldToken) {
+        VerificationToken verificationToken = tokenRepository.findByToken(oldToken);
+        var verificationTokenTime = new VerificationToken();
+        verificationToken.setToken(UUID.randomUUID().toString());
+        verificationToken.setExpirationTime(verificationTokenTime.getTokenExpirationTime());
+        return tokenRepository.save(verificationToken);
     }
 }
