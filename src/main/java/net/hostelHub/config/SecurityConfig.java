@@ -35,6 +35,7 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .authenticationProvider(authenticationProvider)
                 .authorizeHttpRequests( requests -> requests
+                        .requestMatchers("api/v1/users/change-password").authenticated()
                         .requestMatchers("api/v1/users/**").permitAll()
                         .requestMatchers("api/v1/auth/**").permitAll()
                         .requestMatchers("api/v1/verify/**").permitAll()

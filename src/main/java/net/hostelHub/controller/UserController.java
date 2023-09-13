@@ -91,4 +91,14 @@ public class UserController {
         return "Invalid password reset token";
     }
 
+    @PostMapping("/change-password")
+    public String changePassword(@RequestBody PasswordRequestUtil requestUtil) {
+        User user = userService.findByEmail(requestUtil.getEmail()).get();
+        if (!userService.oldPasswordIsValid(user, requestUtil.getOldPassword())) {
+            return "Incorrect old password";
+        }
+        userService.changePassword(user, requestUtil.getNewPassword());
+        return "Password changed successfully";
+    }
+
 }

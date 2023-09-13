@@ -21,4 +21,5 @@ public interface UserService {
     User fetchUser(String emailOrUsername);
     void changePassword(User user, String newPassword);
     Optional<User> findByEmail(String email);
+    boolean oldPasswordIsValid(User user, String oldPassword);
 }
