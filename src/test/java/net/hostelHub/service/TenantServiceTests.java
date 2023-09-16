@@ -1,13 +1,13 @@
 package net.hostelHub.service;
 
 import net.hostelHub.dto.Response;
-import net.hostelHub.dto.tenant.HostelPropertyRequest;
+import net.hostelHub.dto.properties.HostelPropertyRequest;
 import net.hostelHub.entity.User;
-import net.hostelHub.entity.tenant.HostelProperty;
+import net.hostelHub.entity.properties.HostelProperty;
 import net.hostelHub.repository.UserRepository;
-import net.hostelHub.repository.tenant.HostelPropertyRepository;
-import net.hostelHub.repository.tenant.PropertyPhotoRepository;
-import net.hostelHub.service.tenant.TenantServiceImpl;
+import net.hostelHub.repository.properties.HostelPropertyRepository;
+import net.hostelHub.repository.properties.PropertyPhotoRepository;
+import net.hostelHub.service.properties.TenantServiceImpl;
 import net.hostelHub.utils.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,10 +1,7 @@
-package net.hostelHub.repository.tenant;
+package net.hostelHub.repository.properties;
 
-import net.hostelHub.entity.tenant.HostelProperty;
-import net.hostelHub.utils.School;
+import net.hostelHub.entity.properties.HostelProperty;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.List;
 
 public interface HostelPropertyRepository extends JpaRepository<HostelProperty, Long> {
 }

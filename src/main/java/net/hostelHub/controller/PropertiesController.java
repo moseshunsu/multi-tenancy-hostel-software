@@ -1,10 +1,10 @@
 package net.hostelHub.controller;
 
 import net.hostelHub.dto.Response;
-import net.hostelHub.dto.tenant.HostelPropertyRequest;
-import net.hostelHub.dto.tenant.PropertyPhotoRequest;
-import net.hostelHub.entity.tenant.HostelProperty;
-import net.hostelHub.service.tenant.TenantService;
+import net.hostelHub.dto.properties.HostelPropertyRequest;
+import net.hostelHub.dto.properties.PropertyPhotoRequest;
+import net.hostelHub.entity.properties.HostelProperty;
+import net.hostelHub.service.properties.TenantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,28 +12,28 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/tenants")
-public class TenantController {
+@RequestMapping("api/v1/properties")
+public class PropertiesController {
 
     @Autowired
     TenantService tenantService;
 
-    @PostMapping("/properties")
+    @PostMapping
     public ResponseEntity<Response> registerProperty(@RequestBody HostelPropertyRequest hostelPropertyRequest) {
         return tenantService.registerProperty(hostelPropertyRequest);
     }
 
-    @PostMapping("/properties/photos")
+    @PostMapping("/photos")
     public ResponseEntity<Response> addPhoto(@RequestBody PropertyPhotoRequest propertyPhotoRequest) {
         return tenantService.addPhoto(propertyPhotoRequest);
     }
 
-    @GetMapping("/properties")
+    @GetMapping
     public ResponseEntity<List<HostelProperty>> viewAllProperties(@RequestParam String uniqueCode) {
         return tenantService.viewAllProperties(uniqueCode);
     }
 
-    @GetMapping("/properties/property")
+    @GetMapping("/property")
     public ResponseEntity<HostelProperty> viewSpecificProperty(@RequestBody HostelPropertyRequest hostelPropertyRequest) {
         return tenantService.viewSpecificProperty(hostelPropertyRequest);
     }

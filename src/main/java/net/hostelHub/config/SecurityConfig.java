@@ -40,7 +40,7 @@ public class SecurityConfig {
                         .requestMatchers("api/v1/users/**").permitAll()
                         .requestMatchers("api/v1/auth/**").permitAll()
                         .requestMatchers("api/v1/verify/**").permitAll()
-                        .requestMatchers("api/v1/tenants/**").permitAll()
+                        .requestMatchers("api/v1/properties/**").hasRole(MANAGER.name())
                         .requestMatchers("api/v1/rooms/**").permitAll()
                         .requestMatchers("api/v1/bookings/**").permitAll()
                         .requestMatchers("api/v1/demo").hasAnyRole(OCCUPANT.name(), MANAGER.name()))

@@ -1,4 +1,4 @@
-package net.hostelHub.dto.tenant;
+package net.hostelHub.dto.properties;
 
 import lombok.Builder;
 import lombok.Getter;

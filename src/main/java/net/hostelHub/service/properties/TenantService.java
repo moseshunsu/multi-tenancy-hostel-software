@@ -1,9 +1,9 @@
-package net.hostelHub.service.tenant;
+package net.hostelHub.service.properties;
 
 import net.hostelHub.dto.Response;
-import net.hostelHub.dto.tenant.HostelPropertyRequest;
-import net.hostelHub.dto.tenant.PropertyPhotoRequest;
-import net.hostelHub.entity.tenant.HostelProperty;
+import net.hostelHub.dto.properties.HostelPropertyRequest;
+import net.hostelHub.dto.properties.PropertyPhotoRequest;
+import net.hostelHub.entity.properties.HostelProperty;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;

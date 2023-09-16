@@ -1,4 +1,4 @@
-package net.hostelHub.entity.tenant;
+package net.hostelHub.entity.properties;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
