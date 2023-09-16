@@ -1,9 +1,12 @@
 package net.hostelHub.controller;
 
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import net.hostelHub.dto.Response;
 import net.hostelHub.dto.room.RoomRequest;
 import net.hostelHub.dto.room.RoomResponseDto;
 import net.hostelHub.dto.room.RoomTypeRequest;
+import net.hostelHub.exception.UserNotFoundException;
 import net.hostelHub.service.room.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,18 +16,17 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/rooms")
+@RequiredArgsConstructor
 public class RoomController {
-
-    @Autowired
-    RoomService roomService;
+    private final RoomService roomService;
 
     @PostMapping("/room-types")
-    public ResponseEntity<Response> addRoomType(@RequestBody RoomTypeRequest roomTypeRequest) {
+    public ResponseEntity<Response> addRoomType(@RequestBody @Valid RoomTypeRequest roomTypeRequest) {
         return roomService.addRoomType(roomTypeRequest);
     }
 
     @PostMapping("/room")
-    public ResponseEntity<Response> addRoom(@RequestBody RoomRequest roomRequest) {
+    public ResponseEntity<Response> addRoom(@RequestBody @Valid RoomRequest roomRequest) throws UserNotFoundException {
         return roomService.addRoom(roomRequest);
     }
 

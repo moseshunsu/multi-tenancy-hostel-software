@@ -10,8 +10,12 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
-@Entity @Setter @Getter @Table(name = "room_types")
-@AllArgsConstructor @NoArgsConstructor
+@Entity
+@Setter
+@Getter
+@Table(name = "room_types")
+@AllArgsConstructor
+@NoArgsConstructor
 public class RoomType {
 
     @Id

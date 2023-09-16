@@ -7,10 +7,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import net.hostelHub.utils.RoomStatus;
+import net.hostelHub.utils.School;
 import net.hostelHub.utils.Sex;
 
-@Setter @Getter @Entity @Table(name = "rooms")
-@AllArgsConstructor @NoArgsConstructor
+@Setter
+@Getter
+@Entity
+@Table(name = "rooms")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Room {
 
     @Id
@@ -20,6 +25,18 @@ public class Room {
     @JoinColumn(name = "room_type_id")
     @JsonIgnore
     private RoomType roomType;
+
+    @Column(nullable = false, name = "unique_code")
+    private String uniqueCode;
+
+    @Column(nullable = false, name = "hostel_name")
+    private String hostelName;
+
+    @Column(nullable = false, name = "school_name")
+    private String schoolName;
+
+    @Column(nullable = false, name = "price_per_bed")
+    private Double pricePerBed;
 
     @Enumerated(EnumType.STRING)
     private Sex sex;

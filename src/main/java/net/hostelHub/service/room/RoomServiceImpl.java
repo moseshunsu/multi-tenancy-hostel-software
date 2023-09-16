@@ -1,38 +1,39 @@
 package net.hostelHub.service.room;
 
+import lombok.RequiredArgsConstructor;
 import net.hostelHub.dto.Data;
 import net.hostelHub.dto.Response;
 import net.hostelHub.dto.room.RoomRequest;
 import net.hostelHub.dto.room.RoomResponseDto;
 import net.hostelHub.dto.room.RoomTypeRequest;
+import net.hostelHub.entity.User;
+import net.hostelHub.entity.properties.HostelProperty;
 import net.hostelHub.entity.room.Room;
 import net.hostelHub.entity.room.RoomType;
-import net.hostelHub.entity.properties.HostelProperty;
+import net.hostelHub.exception.NoSuchElementException;
+import net.hostelHub.exception.UserNotFoundException;
+import net.hostelHub.repository.UserRepository;
+import net.hostelHub.repository.properties.HostelPropertyRepository;
 import net.hostelHub.repository.room.RoomRepository;
 import net.hostelHub.repository.room.RoomTypeRepository;
-import net.hostelHub.repository.properties.HostelPropertyRepository;
 import net.hostelHub.utils.ResponseUtils;
 import net.hostelHub.utils.RoomStatus;
 import net.hostelHub.utils.School;
 import net.hostelHub.utils.Sex;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class RoomServiceImpl implements RoomService{
-
-    @Autowired
-    RoomTypeRepository roomTypeRepository;
-    @Autowired
-    RoomRepository roomRepository;
-    @Autowired
-    HostelPropertyRepository hostelPropertyRepository;
+    private final RoomTypeRepository roomTypeRepository;
+    private final RoomRepository roomRepository;
+    private final HostelPropertyRepository hostelPropertyRepository;
+    private final UserRepository userRepository;
 
     @Override
     public ResponseEntity<Response> addRoomType(RoomTypeRequest roomTypeRequest) {
@@ -108,7 +109,7 @@ public class RoomServiceImpl implements RoomService{
     }
 
     @Override
-    public ResponseEntity<Response> addRoom(RoomRequest roomRequest) {
+    public ResponseEntity<Response> addRoom(RoomRequest roomRequest) throws UserNotFoundException {
 
         boolean isRoomExists = roomRepository.existsById(roomRequest.getRoomNumber());
 
@@ -126,11 +127,22 @@ public class RoomServiceImpl implements RoomService{
             );
         }
 
+        User fetchedUser = userRepository.findAll()
+                .stream()
+                .filter(
+                       user -> user.getUniqueCode().equals(roomRequest.getUniqueCode())
+                )
+                .findFirst()
+                .orElseThrow(() ->
+                        new UserNotFoundException("user not found with unique code: " + roomRequest.getUniqueCode())
+                );
+
         RoomType roomType = roomTypeRepository.findAll()
                 .stream()
                 .filter(
                         type -> roomRequest.getHostelName().equalsIgnoreCase(type.getHostelName()) &&
-                                roomRequest.getNumberInARoom() == type.getNumberInARoom() &&
+                                roomRequest.getNumberInARoom().equals(type.getNumberInARoom()) &&
+                                roomRequest.getUniqueCode().equals(type.getUniqueCode()) &&
                                 roomRequest.getSchoolName().equalsIgnoreCase(type.getSchoolName())
                 )
                 .findFirst()
@@ -139,10 +151,16 @@ public class RoomServiceImpl implements RoomService{
         Room room = new Room();
         room.setRoomNumber(roomRequest.getRoomNumber());
         room.setRoomType(roomType);
+        room.setUniqueCode(fetchedUser.getUniqueCode());
         room.setRoomStatus(RoomStatus.valueOf(roomRequest.getRoomStatus().toUpperCase()));
+        room.setHostelName(roomType.getHostelName());
+        room.setSchoolName(roomType.getSchoolName());
+        room.setPricePerBed(roomType.getPricePerBed());
         room.setSex(Sex.valueOf(roomRequest.getSex().toUpperCase()));
         room.setBedAvailable(
-                roomRequest.getRoomStatus().equals("MAINTENANCE") ? 0 : room.getRoomType().getNumberInARoom()
+                roomRequest.getRoomStatus().equals("MAINTENANCE") || roomRequest.getRoomStatus().equals("OCCUPIED")
+                        ? 0
+                        : room.getRoomType().getNumberInARoom()
         );
 
         Room savedRoom = roomRepository.save(room);
