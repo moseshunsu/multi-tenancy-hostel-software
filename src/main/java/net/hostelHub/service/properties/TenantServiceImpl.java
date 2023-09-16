@@ -1,15 +1,16 @@
-package net.hostelHub.service.tenant;
+package net.hostelHub.service.properties;
 
 import net.hostelHub.dto.Data;
 import net.hostelHub.dto.Response;
-import net.hostelHub.dto.tenant.HostelPropertyRequest;
-import net.hostelHub.dto.tenant.PropertyPhotoRequest;
+import net.hostelHub.dto.properties.HostelPropertyRequest;
+import net.hostelHub.dto.properties.PropertyPhotoRequest;
 import net.hostelHub.entity.User;
-import net.hostelHub.entity.tenant.HostelProperty;
-import net.hostelHub.entity.tenant.PropertyPhoto;
+import net.hostelHub.entity.properties.HostelProperty;
+import net.hostelHub.entity.properties.PropertyPhoto;
+import net.hostelHub.exception.NoSuchElementException;
 import net.hostelHub.repository.UserRepository;
-import net.hostelHub.repository.tenant.HostelPropertyRepository;
-import net.hostelHub.repository.tenant.PropertyPhotoRepository;
+import net.hostelHub.repository.properties.HostelPropertyRepository;
+import net.hostelHub.repository.properties.PropertyPhotoRepository;
 import net.hostelHub.utils.ResponseUtils;
 import net.hostelHub.utils.School;
 import net.hostelHub.utils.State;
@@ -20,7 +21,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Service
 public class TenantServiceImpl implements TenantService {
@@ -107,7 +107,7 @@ public class TenantServiceImpl implements TenantService {
         propertyPhoto.setDescription(propertyPhotoRequest.getDescription());
         propertyPhoto.setHostelProperty(hostelProperty);
 
-        PropertyPhoto savedPropertyPhoto = propertyPhotoRepository.save(propertyPhoto);
+        propertyPhotoRepository.save(propertyPhoto);
 
         return ResponseEntity.ok().body(
                 Response.builder()
