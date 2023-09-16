@@ -1,5 +1,7 @@
 package net.hostelHub.controller;
 
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import net.hostelHub.dto.Response;
 import net.hostelHub.dto.booking.BookingRequest;
 import net.hostelHub.dto.room.RoomResponseDto;
@@ -12,13 +14,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/bookings")
+@RequiredArgsConstructor
 public class BookingController {
-
-    @Autowired
-    BookingService bookingService;
+    private final BookingService bookingService;
 
     @PostMapping
-    public ResponseEntity<Response> makeBooking(@RequestBody BookingRequest bookingRequest) {
+    public ResponseEntity<Response> makeBooking(@RequestBody @Valid BookingRequest bookingRequest) {
         return bookingService.makeBooking(bookingRequest);
     }
 
