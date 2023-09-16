@@ -24,7 +24,11 @@ public class UserRequest {
     @Email
     private String email;
 
-    @Pattern(regexp = "^\\d{10,}$", message = "phone number must not be less than 10 digits")
+    @Pattern(regexp = "^(?!.*\\s)\\d{10,20}$",
+            message = """
+                    digits must not be less than 10 digits or more than 20 digits +
+                    and must not include a white space character
+                    """)
     private String phoneNumber;
 
     @Pattern(
