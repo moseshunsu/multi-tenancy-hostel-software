@@ -17,6 +17,7 @@ public class ResponseUtils {
     public static final String USER_EXISTS_MESSAGE = "User with provided email or username already exists!";
     public  static final int LENGTH_OF_TENANT_CODE = 6;
     public  static final int LENGTH_OF_OCCUPANT_CODE = 10;
+    public  static final int LENGTH_OF_UNIQUE_BOOKING_NUMBER = 7;
     public static final String USER_REGISTRATION_MESSAGE = "Success! Please, check your email to complete your " +
             "registration";
     public static final String USER_NOT_FOUND_MESSAGE = "This user doesn't exists";

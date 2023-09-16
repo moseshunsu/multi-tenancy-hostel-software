@@ -8,6 +8,7 @@ import lombok.Setter;
 import net.hostelHub.utils.State;
 import net.hostelHub.utils.Status;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
@@ -24,26 +25,27 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true, name = "unique_booking_number")
+    @NaturalId
+    private String uniqueBookingNumber;
+
+    @Column(nullable = false, name = "hostel_name")
     private String hostelName;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "unique_occupant_code")
     private String uniqueOccupantCode; //For the student
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "occupant_email")
     private String occupantEmail;
 
-    @Column(nullable = false)
-    private String uniqueTenantCode; //For the hostel owner
+    @Column(nullable = false, name = "unique_manager_code")
+    private String uniqueManagerCode; //For the hostel owner
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "hostel_contact_mail")
     private String hostelContactMail;
 
     @Column(nullable = false)
-    private String school;
-
-    @Enumerated(EnumType.STRING)
-    private State state;
+    private String schoolName;
 
     @Column(name = "academic_year")
     private String academicYear;

@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import net.hostelHub.utils.RoomStatus;
-import net.hostelHub.utils.School;
 import net.hostelHub.utils.Sex;
 
 @Setter
@@ -41,7 +40,8 @@ public class Room {
     @Enumerated(EnumType.STRING)
     private Sex sex;
 
-    private int bedAvailable; // This indicates the number of beds available and increases based on booking
+    @Column(name = "bed_available")
+    private Integer bedAvailable; // This indicates the number of beds available and increases based on booking
 
     @Enumerated(EnumType.STRING)
     private RoomStatus roomStatus;

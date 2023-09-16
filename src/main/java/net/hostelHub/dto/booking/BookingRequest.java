@@ -15,7 +15,7 @@ public class BookingRequest {
     private String schoolName;
 
     @NotNull(message = "unique code must not be null")
-    private String uniqueCode;
+    private String uniqueOccupantCode;
 
     @NotNull(message = "academic year must not be null")
     private String academicYear;
