@@ -36,6 +36,7 @@ public class SecurityConfig {
                 .authenticationProvider(authenticationProvider)
                 .authorizeHttpRequests( requests -> requests
                         .requestMatchers("api/v1/users/change-password").authenticated()
+                        .requestMatchers("api/v1/payment/**").permitAll()
                         .requestMatchers("api/v1/users/**").permitAll()
                         .requestMatchers("api/v1/auth/**").permitAll()
                         .requestMatchers("api/v1/verify/**").permitAll()
