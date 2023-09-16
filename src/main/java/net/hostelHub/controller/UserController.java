@@ -2,6 +2,7 @@ package net.hostelHub.controller;
 
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.hostelHub.dto.Response;
@@ -33,7 +34,7 @@ public class UserController {
     private final RegistrationCompleteEventListener eventListener;
 
     @PostMapping("/sign-up")
-    public ResponseEntity<Response> registerOccupant(@RequestBody UserRequest userRequest,
+    public ResponseEntity<Response> registerOccupant(@RequestBody @Valid UserRequest userRequest,
                                                      Role role,
                                                      Integer lengthOfCode,
                                                      HttpServletRequest request) {
@@ -41,7 +42,7 @@ public class UserController {
     }
 
     @PostMapping("/sign-up/managers")
-    public ResponseEntity<Response> registerManager(@RequestBody UserRequest userRequest,
+    public ResponseEntity<Response> registerManager(@RequestBody @Valid UserRequest userRequest,
                                                    Role role,
                                                    Integer lengthOfCode,
                                                    HttpServletRequest request) {

@@ -31,6 +31,8 @@ public class PaymentPayStack {
     private String channel;
     private String currency;
     private String ipAddress;
+
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     private PricingPlanType pricingPlanType = PricingPlanType.BASIC;
 

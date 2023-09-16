@@ -1,5 +1,6 @@
 package net.hostelHub.controller;
 
+import jakarta.validation.Valid;
 import net.hostelHub.dto.Response;
 import net.hostelHub.dto.properties.HostelPropertyRequest;
 import net.hostelHub.dto.properties.PropertyPhotoRequest;
@@ -19,7 +20,7 @@ public class PropertiesController {
     TenantService tenantService;
 
     @PostMapping
-    public ResponseEntity<Response> registerProperty(@RequestBody HostelPropertyRequest hostelPropertyRequest) {
+    public ResponseEntity<Response> registerProperty(@RequestBody @Valid HostelPropertyRequest hostelPropertyRequest) {
         return tenantService.registerProperty(hostelPropertyRequest);
     }
 

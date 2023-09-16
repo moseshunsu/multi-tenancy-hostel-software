@@ -5,6 +5,7 @@ import lombok.*;
 import net.hostelHub.entity.token.Token;
 import net.hostelHub.utils.Role;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,16 +28,19 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NaturalId
     @Column(nullable = false, unique = true, name = "unique_code")
     private String uniqueCode;
 
     @Column(nullable = false)
     private String name;
 
+    @NaturalId
     @Column(unique = true, nullable = false)
     private String username;
 
-    @Column(unique = true)
+    @NaturalId
+    @Column(unique = true, nullable = false)
     private String email;
 
     @Column(name = "phone_number", unique = true, nullable = false, length = 20)
