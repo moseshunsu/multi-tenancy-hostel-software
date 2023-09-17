@@ -3,6 +3,7 @@ package net.hostelHub.payment.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import net.hostelHub.exception.PaymentException;
 import net.hostelHub.payment.dto.*;
 import net.hostelHub.payment.entity.PaymentPayStack;
 import net.hostelHub.payment.repository.PayStackPaymentRepository;
@@ -102,7 +103,7 @@ public class PayStackServiceImpl implements PayStackService {
     }
 
     @Override
-    public PaymentVerificationResponse paymentVerification(String reference) throws Exception {
+    public PaymentVerificationResponse paymentVerification(String reference) throws PaymentException {
         PaymentVerificationResponse paymentVerificationResponse;
 
 
@@ -122,7 +123,9 @@ public class PayStackServiceImpl implements PayStackService {
                     result.append(line);
                 }
             } else {
-                throw new Exception("Paystack is unable to verify payment at the moment");
+                throw new PaymentException(
+                        "PayStack is unable to verify payment at the moment, invalid reference no: " + reference
+                );
             }
 
             ObjectMapper mapper = new ObjectMapper();

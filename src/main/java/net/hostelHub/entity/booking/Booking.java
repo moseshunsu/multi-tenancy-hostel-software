@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import net.hostelHub.utils.State;
 import net.hostelHub.utils.Status;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.NaturalId;
@@ -41,8 +40,8 @@ public class Booking {
     @Column(nullable = false, name = "unique_manager_code")
     private String uniqueManagerCode; //For the hostel owner
 
-    @Column(nullable = false, name = "hostel_contact_mail")
-    private String hostelContactMail;
+    @Column(nullable = false, name = "hostel_contact_email")
+    private String hostelContactEMail;
 
     @Column(nullable = false)
     private String schoolName;

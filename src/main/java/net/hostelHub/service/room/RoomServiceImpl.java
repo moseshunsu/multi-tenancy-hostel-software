@@ -26,8 +26,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -202,7 +200,7 @@ public class RoomServiceImpl implements RoomService{
                     .hostelName(room.getRoomType().getHostelName())
                     .schoolName(room.getRoomType().getSchoolName())
                     .uniqueCode(room.getRoomType().getUniqueCode())
-                    .hostelContactMail(hostelContactMail(schoolName, hostelName))
+                    .hostelContactEmail(hostelContactMail(schoolName, hostelName))
                     .roomStatus(room.getRoomStatus().name())
                     .pricePerBed(room.getRoomType().getPricePerBed())
                     .description(room.getRoomType().getDescription())
@@ -232,7 +230,7 @@ public class RoomServiceImpl implements RoomService{
                         .hostelName(room.getRoomType().getHostelName())
                         .schoolName(room.getRoomType().getSchoolName())
                         .uniqueCode(room.getRoomType().getUniqueCode())
-                        .hostelContactMail(hostelContactMail(schoolName, hostelName))
+                        .hostelContactEmail(hostelContactMail(schoolName, hostelName))
                         .roomStatus(room.getRoomStatus().name())
                         .pricePerBed(room.getRoomType().getPricePerBed())
                         .description(room.getRoomType().getDescription())

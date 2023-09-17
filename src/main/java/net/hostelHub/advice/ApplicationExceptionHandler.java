@@ -1,6 +1,7 @@
 package net.hostelHub.advice;
 
 import net.hostelHub.exception.NoSuchElementException;
+import net.hostelHub.exception.PaymentException;
 import net.hostelHub.exception.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -54,6 +55,14 @@ public class ApplicationExceptionHandler {
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
     public Map<String, String> handleSQLIntegrityConstraintViolationException(
             SQLIntegrityConstraintViolationException ex) {
+        Map<String, String> errorMap = new HashMap<>();
+        errorMap.put("errorMessage", ex.getMessage());
+        return errorMap;
+    }
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(PaymentException.class)
+    public Map<String, String> handlePaymentException(PaymentException ex) {
         Map<String, String> errorMap = new HashMap<>();
         errorMap.put("errorMessage", ex.getMessage());
         return errorMap;

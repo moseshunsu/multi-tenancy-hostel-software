@@ -12,6 +12,10 @@ import net.hostelHub.entity.booking.Booking;
 import net.hostelHub.entity.room.Room;
 import net.hostelHub.exception.NoSuchElementException;
 import net.hostelHub.exception.UserNotFoundException;
+import net.hostelHub.payment.dto.InitializePaymentDto;
+import net.hostelHub.payment.dto.InitializePaymentResponse;
+import net.hostelHub.payment.dto.PaymentVerificationResponse;
+import net.hostelHub.payment.service.PayStackService;
 import net.hostelHub.repository.UserRepository;
 import net.hostelHub.repository.booking.BookingRepository;
 import net.hostelHub.repository.room.RoomRepository;
@@ -19,9 +23,12 @@ import net.hostelHub.service.room.RoomService;
 import net.hostelHub.utils.ResponseUtils;
 import net.hostelHub.utils.RoomStatus;
 import net.hostelHub.utils.Status;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static net.hostelHub.utils.ResponseUtils.generateClientCode;
@@ -34,6 +41,10 @@ public class BookingServiceImpl implements BookingService {
     private final UserRepository userRepository;
     private final EmailService emailService;
     private final RoomRepository roomRepository;
+    private final PayStackService payStackService;
+
+    @Value("${spring.mail.username}")
+    private String email;
 
     @Override
     public ResponseEntity<Response> makeBooking(BookingRequest bookingRequest) throws UserNotFoundException {
@@ -64,7 +75,7 @@ public class BookingServiceImpl implements BookingService {
             booking.setUniqueOccupantCode(occupant.getUniqueCode());
             booking.setOccupantEmail(bookingRequest.getOccupantEmail());
             booking.setUniqueManagerCode(fetchedRoomDetailsBody.getUniqueCode());
-            booking.setHostelContactMail(fetchedRoomDetailsBody.getHostelContactMail());
+            booking.setHostelContactEMail(fetchedRoomDetailsBody.getHostelContactEmail());
             booking.setAcademicYear(bookingRequest.getAcademicYear());
             booking.setRoomNumber(fetchedRoomDetailsBody.getRoomNumber());
             booking.setPrice(fetchedRoomDetailsBody.getPricePerBed());
@@ -78,7 +89,7 @@ public class BookingServiceImpl implements BookingService {
 
             emailService.sendSimpleMail(createEmailDetails(subject, occupant.getEmail(), occupantMessage));
             emailService.sendSimpleMail(createEmailDetails(subject,
-                                                            fetchedRoomDetailsBody.getHostelContactMail(),
+                                                            fetchedRoomDetailsBody.getHostelContactEmail(),
                                                             hostelMessage));
 
             return ResponseEntity.ok().body(
@@ -145,6 +156,27 @@ public class BookingServiceImpl implements BookingService {
                     return ResponseEntity.ok(booking);
                 })
                 .orElseThrow( () -> new NoSuchElementException("No such booking found!!! - " + uniqueBookingNumber));
+    }
+
+    @Override
+    public ResponseEntity<InitializePaymentResponse> initializePayment(String uniqueBookingNumber) {
+        Booking fetchedBooking = bookingRepository.findAll()
+                .stream()
+                .filter(booking -> booking.getUniqueBookingNumber().equalsIgnoreCase(uniqueBookingNumber))
+                .findAny()
+                .orElseThrow(() -> new NoSuchElementException("No booking found for " + uniqueBookingNumber));
+
+        InitializePaymentDto paymentDto = InitializePaymentDto.builder()
+                .amount(BigDecimal.valueOf(fetchedBooking.getPrice()))
+                .email(email)
+                .build();
+
+        return new ResponseEntity<>(payStackService.initializePayment(paymentDto), HttpStatus.CREATED);
+    }
+
+    @Override
+    public ResponseEntity<PaymentVerificationResponse> paymentVerification(String reference) throws Exception {
+        return ResponseEntity.ok().body(payStackService.paymentVerification(reference));
     }
 
     private boolean updateRoomStatus(Booking booking) {

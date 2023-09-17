@@ -7,6 +7,9 @@ import net.hostelHub.dto.booking.BookingRequest;
 import net.hostelHub.dto.room.RoomResponseDto;
 import net.hostelHub.entity.booking.Booking;
 import net.hostelHub.exception.UserNotFoundException;
+import net.hostelHub.payment.dto.InitializePaymentDto;
+import net.hostelHub.payment.dto.InitializePaymentResponse;
+import net.hostelHub.payment.dto.PaymentVerificationResponse;
 import net.hostelHub.service.booking.BookingService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +41,17 @@ public class BookingController {
     @PutMapping("/{uniqueBookingNumber}")
     public ResponseEntity<?> approveBooking (@PathVariable String uniqueBookingNumber) {
         return bookingService.approveBooking(uniqueBookingNumber);
+    }
+
+    @PostMapping("/payment")
+    public ResponseEntity<InitializePaymentResponse> initializePayment(@RequestParam String uniqueBookingNumber) {
+        return bookingService.initializePayment(uniqueBookingNumber);
+    }
+
+    @GetMapping("/payment")
+    public ResponseEntity<PaymentVerificationResponse> paymentVerification(@RequestParam String reference)
+            throws Exception {
+        return bookingService.paymentVerification(reference);
     }
 
 }

@@ -9,7 +9,7 @@ public class RoomResponseDto {
     private String hostelName;
     private String schoolName;
     private String uniqueCode;
-    private String hostelContactMail;
+    private String hostelContactEmail;
     private Double pricePerBed;
     private String roomStatus;
     private String description;
