@@ -33,13 +33,12 @@ import io.swagger.v3.oas.annotations.servers.Server;
                 @Server(
                         description = "Prod ENV",
                         url = "https://multi-tenant-hostel-application.onrender.com"
+                ),
+                @Server(
+                        description = "Prod ENV",
+                        url = "https://multi-tenancy-hostel-software-production.up.railway.app/"
                 )
         }
-//        security = {
-//                @SecurityRequirement(
-//                        name = "bearerAuth"
-//                )
-//        }
 )
 @SecurityScheme(
         name = "bearerAuth",
