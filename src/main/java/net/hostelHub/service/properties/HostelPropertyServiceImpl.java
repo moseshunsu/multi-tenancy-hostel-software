@@ -1,5 +1,6 @@
 package net.hostelHub.service.properties;
 
+import lombok.RequiredArgsConstructor;
 import net.hostelHub.dto.Data;
 import net.hostelHub.dto.Response;
 import net.hostelHub.dto.properties.HostelPropertyRequest;
@@ -21,16 +22,15 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
-public class TenantServiceImpl implements TenantService {
-
-    @Autowired
-    private HostelPropertyRepository hostelPropertyRepository;
-    @Autowired
-    private PropertyPhotoRepository propertyPhotoRepository;
-    @Autowired
-    private UserRepository userRepository;
+@RequiredArgsConstructor
+public class HostelPropertyServiceImpl implements HostelPropertyService {
+    private final HostelPropertyRepository hostelPropertyRepository;
+    private final PropertyPhotoRepository propertyPhotoRepository;
+    private final UserRepository userRepository;
 
     @Override
     public ResponseEntity<Response> registerProperty(HostelPropertyRequest hostelPropertyRequest) {
@@ -146,6 +146,16 @@ public class TenantServiceImpl implements TenantService {
                 .findFirst()
                 .orElseThrow( () -> new NoSuchElementException("No such hostel found; check hostel name and school"))
         );
+    }
+
+    @Override
+    public ResponseEntity<Set<HostelProperty>> fetchAvailableHostels(String schoolName) {
+        Set<HostelProperty> hostelProperties = hostelPropertyRepository.findAll()
+                .stream()
+                .filter(hostel -> hostel.getSchoolName().name().equalsIgnoreCase(schoolName))
+                .collect(Collectors.toSet());
+
+        return hostelProperties.isEmpty() ? ResponseEntity.ok(hostelProperties) : ResponseEntity.noContent().build();
     }
 
 }

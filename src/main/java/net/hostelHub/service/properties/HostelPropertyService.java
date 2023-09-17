@@ -7,11 +7,13 @@ import net.hostelHub.entity.properties.HostelProperty;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.Set;
 
-public interface TenantService {
+public interface HostelPropertyService {
     ResponseEntity<Response> registerProperty(HostelPropertyRequest hostelPropertyRequest);
     ResponseEntity<Response> addPhoto(PropertyPhotoRequest propertyPhotoRequest);
     ResponseEntity<List<HostelProperty>> viewAllProperties(String uniqueCode);
     ResponseEntity<HostelProperty> viewSpecificProperty(HostelPropertyRequest hostelPropertyRequest);
-    //Updating property details
+    ResponseEntity<Set<HostelProperty>> fetchAvailableHostels(String schoolName);
+
 }

@@ -8,7 +8,6 @@ import net.hostelHub.dto.room.RoomResponseDto;
 import net.hostelHub.dto.room.RoomTypeRequest;
 import net.hostelHub.exception.UserNotFoundException;
 import net.hostelHub.service.room.RoomService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +29,7 @@ public class RoomController {
         return roomService.addRoom(roomRequest);
     }
 
-    @GetMapping("/room")
+    @GetMapping("/room-details")
     public ResponseEntity<RoomResponseDto> fetchRoomDetails(@RequestParam String schoolName,
                                                             @RequestParam String hostelName,
                                                             @RequestParam String roomNumber) {

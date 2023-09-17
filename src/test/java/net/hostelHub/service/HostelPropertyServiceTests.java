@@ -7,7 +7,7 @@ import net.hostelHub.entity.properties.HostelProperty;
 import net.hostelHub.repository.UserRepository;
 import net.hostelHub.repository.properties.HostelPropertyRepository;
 import net.hostelHub.repository.properties.PropertyPhotoRepository;
-import net.hostelHub.service.properties.TenantServiceImpl;
+import net.hostelHub.service.properties.HostelPropertyServiceImpl;
 import net.hostelHub.utils.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.any;
 
 @ExtendWith(MockitoExtension.class)
-public class TenantServiceTests {
+public class HostelPropertyServiceTests {
 
     @Mock
     private HostelPropertyRepository hostelPropertyRepository;
@@ -37,7 +37,7 @@ public class TenantServiceTests {
     private UserRepository userRepository;
 
     @InjectMocks
-    TenantServiceImpl tenantService;
+    HostelPropertyServiceImpl tenantService;
 
     // JUnit test for register property method
     @DisplayName("JUnit test for register property method")
