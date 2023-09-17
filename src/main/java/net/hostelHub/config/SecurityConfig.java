@@ -34,14 +34,32 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .authenticationProvider(authenticationProvider)
                 .authorizeHttpRequests( requests -> requests
-                        .requestMatchers("api/v1/users/change-password").authenticated()
-                        .requestMatchers("api/v1/rooms/room-types", "api/v1/rooms/room")
+                        .requestMatchers("api/v1/users/change-password")
+                        .authenticated()
+                        .requestMatchers(
+                                "api/v1/rooms/room-types",
+                                "api/v1/rooms/room")
                         .hasAnyRole(MANAGER.name())
-                        .requestMatchers("api/v1/bookings/**", "api/v1/rooms/**", "api/v1/properties/hostels")
+                        .requestMatchers(
+                                "api/v1/bookings/**",
+                                "api/v1/rooms/**",
+                                "api/v1/properties/hostels")
                         .hasAnyRole(OCCUPANT.name(), MANAGER.name())
-                        .requestMatchers("api/v1/payment/**", "api/v1/users/**", "api/v1/auth/**",
-                                "api/v1/demo", "api/v1/verify/**").permitAll()
-                        .requestMatchers("api/v1/properties/**", "api/v1/rooms/**").hasRole(MANAGER.name()))
+                        .requestMatchers(
+                                "api/v1/payment/**",
+                                "api/v1/users/**",
+                                "api/v1/auth/**",
+                                "api/v1/demo",
+                                "api/v1/verify/**",
+                                "/v3/api-docs",
+                                "/v3/api-docs/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html")
+                        .permitAll()
+                        .requestMatchers(
+                                "api/v1/properties/**",
+                                "api/v1/rooms/**")
+                        .hasRole(MANAGER.name()))
                         .formLogin(Customizer.withDefaults())
                         .httpBasic(Customizer.withDefaults())
                 .logout(logout -> logout
