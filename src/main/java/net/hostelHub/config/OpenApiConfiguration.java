@@ -33,14 +33,14 @@ import io.swagger.v3.oas.annotations.servers.Server;
                 ),
                 @Server(
                         description = "Prod ENV",
-                        url = "http://mostechcoding,com/course"
-                )
-        },
-        security = {
-                @SecurityRequirement(
-                        name = "bearerAuth"
+                        url = "https://multi-tenant-hostel-application.onrender.com"
                 )
         }
+//        security = {
+//                @SecurityRequirement(
+//                        name = "bearerAuth"
+//                )
+//        }
 )
 @SecurityScheme(
         name = "bearerAuth",

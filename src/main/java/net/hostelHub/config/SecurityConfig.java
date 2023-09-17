@@ -46,7 +46,6 @@ public class SecurityConfig {
                                 "api/v1/properties/hostels")
                         .hasAnyRole(OCCUPANT.name(), MANAGER.name())
                         .requestMatchers(
-                                "api/v1/payment/**",
                                 "api/v1/users/**",
                                 "api/v1/auth/**",
                                 "api/v1/demo",

@@ -1,5 +1,6 @@
 package net.hostelHub.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import net.hostelHub.dto.Response;
@@ -19,6 +20,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/bookings")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "bearerAuth")
 public class BookingController {
     private final BookingService bookingService;
 

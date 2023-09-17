@@ -1,5 +1,6 @@
 package net.hostelHub.payment.controller;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.RequiredArgsConstructor;
 import net.hostelHub.payment.dto.*;
 import net.hostelHub.payment.service.PayStackService;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/v1/payment")
 @RequiredArgsConstructor
+@Hidden
 public class PayStackController {
 
     private final PayStackService paystackService;

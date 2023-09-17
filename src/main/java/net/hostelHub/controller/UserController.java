@@ -69,8 +69,10 @@ public class UserController {
         return passwordResetUrl;
     }
 
-    private String passwordResetEmailLink(User user, String applicationUrl,
-                                          String passwordToken) throws MessagingException, UnsupportedEncodingException {
+    private String passwordResetEmailLink(User user,
+                                          String applicationUrl,
+                                          String passwordToken)
+            throws MessagingException, UnsupportedEncodingException {
         String url = applicationUrl+"/api/v1/users/reset-password?token="+passwordToken;
         eventListener.sendPasswordResetVerificationEmail(url);
         log.info("Click the link to reset your password :  {}", url);

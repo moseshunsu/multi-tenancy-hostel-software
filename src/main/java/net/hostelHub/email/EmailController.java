@@ -1,5 +1,6 @@
 package net.hostelHub.email;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import net.hostelHub.email.dto.EmailDetails;
 import net.hostelHub.email.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/email")
+@Hidden
 public class EmailController {
 
     @Autowired
