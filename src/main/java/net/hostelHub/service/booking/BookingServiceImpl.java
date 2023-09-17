@@ -92,7 +92,7 @@ public class BookingServiceImpl implements BookingService {
                                                             fetchedRoomDetailsBody.getHostelContactEmail(),
                                                             hostelMessage));
 
-            return ResponseEntity.ok().body(
+            return new ResponseEntity<>(
                     Response.builder()
                             .responseCode(ResponseUtils.BOOKING_SUCCESS_CODE)
                             .responseMessage(ResponseUtils.BOOKING_SUCCESS_MESSAGE)
@@ -102,8 +102,8 @@ public class BookingServiceImpl implements BookingService {
                                             .email(savedbooking.getOccupantEmail())
                                             .build()
                             )
-                            .build()
-            );
+                            .build(),
+                    HttpStatus.CREATED);
         } else  return ResponseEntity.badRequest().body(
                 Response.builder()
                         .responseCode(ResponseUtils.ROOM_NOT_FOUND_CODE)

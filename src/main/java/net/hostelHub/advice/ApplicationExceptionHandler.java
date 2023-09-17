@@ -1,5 +1,6 @@
 package net.hostelHub.advice;
 
+import net.hostelHub.exception.MailException;
 import net.hostelHub.exception.NoSuchElementException;
 import net.hostelHub.exception.PaymentException;
 import net.hostelHub.exception.UserNotFoundException;
@@ -63,6 +64,14 @@ public class ApplicationExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(PaymentException.class)
     public Map<String, String> handlePaymentException(PaymentException ex) {
+        Map<String, String> errorMap = new HashMap<>();
+        errorMap.put("errorMessage", ex.getMessage());
+        return errorMap;
+    }
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(MailException.class)
+    public Map<String, String> handleMailException(MailException ex) {
         Map<String, String> errorMap = new HashMap<>();
         errorMap.put("errorMessage", ex.getMessage());
         return errorMap;

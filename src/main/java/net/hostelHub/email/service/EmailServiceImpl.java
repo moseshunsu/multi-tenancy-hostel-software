@@ -36,10 +36,11 @@ public class EmailServiceImpl implements EmailService {
             mailMessage.setSubject(emailDetails.getSubject());
 
             javaMailSender.send(mailMessage);
+            log.info("Mail sent Successfully");
             return "Mail Sent Successfully...";
         }
         catch (MailException e) {
-            throw new RuntimeException(e);
+            throw new net.hostelHub.exception.MailException(e.getMessage());
         }
 
     }
@@ -62,7 +63,7 @@ public class EmailServiceImpl implements EmailService {
             log.info("Mail sent Successfully");
         }
         catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new net.hostelHub.exception.MailException(e.getMessage());
         }
 
     }
@@ -85,10 +86,11 @@ public class EmailServiceImpl implements EmailService {
             mimeMessageHelper.addAttachment(Objects.requireNonNull(file.getFilename()), file);
 
             javaMailSender.send(mimeMessage);
+            log.info("Mail sent Successfully");
             return "Mail sent Successfully";
         }
         catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new net.hostelHub.exception.MailException(e.getMessage());
         }
 
     }
