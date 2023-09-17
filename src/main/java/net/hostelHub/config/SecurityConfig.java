@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import net.hostelHub.filter.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -38,10 +37,10 @@ public class SecurityConfig {
                         .requestMatchers("api/v1/users/change-password").authenticated()
                         .requestMatchers("api/v1/rooms/room-types", "api/v1/rooms/room")
                         .hasAnyRole(MANAGER.name())
-                        .requestMatchers("api/v1/bookings/**", "api/v1/rooms/**", "api/v1/demo",
-                                "api/v1/properties/hostels").hasAnyRole(OCCUPANT.name(), MANAGER.name())
+                        .requestMatchers("api/v1/bookings/**", "api/v1/rooms/**", "api/v1/properties/hostels")
+                        .hasAnyRole(OCCUPANT.name(), MANAGER.name())
                         .requestMatchers("api/v1/payment/**", "api/v1/users/**", "api/v1/auth/**",
-                                "api/v1/verify/**").permitAll()
+                                "api/v1/demo", "api/v1/verify/**").permitAll()
                         .requestMatchers("api/v1/properties/**", "api/v1/rooms/**").hasRole(MANAGER.name()))
                         .formLogin(Customizer.withDefaults())
                         .httpBasic(Customizer.withDefaults())
