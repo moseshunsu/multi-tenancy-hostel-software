@@ -56,8 +56,7 @@ public class SecurityConfig {
                                 "/swagger-ui.html")
                         .permitAll()
                         .requestMatchers(
-                                "api/v1/properties/**",
-                                "api/v1/rooms/**")
+                                "api/v1/properties/**")
                         .hasRole(MANAGER.name()))
                         .formLogin(Customizer.withDefaults())
                         .httpBasic(Customizer.withDefaults())

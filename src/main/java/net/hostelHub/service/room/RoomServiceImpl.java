@@ -20,6 +20,7 @@ import net.hostelHub.utils.ResponseUtils;
 import net.hostelHub.utils.RoomStatus;
 import net.hostelHub.utils.School;
 import net.hostelHub.utils.Sex;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -85,7 +86,7 @@ public class RoomServiceImpl implements RoomService{
 
             roomTypeRepository.save(roomType);
 
-            return ResponseEntity.ok().body(
+            return new ResponseEntity<>(
                     Response.builder()
                             .responseCode(ResponseUtils.SUCCESS_CODE)
                             .responseMessage(ResponseUtils.ROOM_TYPE_ENTRY_SUCCESS)
@@ -96,7 +97,8 @@ public class RoomServiceImpl implements RoomService{
                                             .email(fetchedProperty.getContactEmail())
                                             .build()
                             )
-                            .build()
+                            .build(),
+                    HttpStatus.CREATED
             );
         }
 
@@ -165,7 +167,7 @@ public class RoomServiceImpl implements RoomService{
 
         Room savedRoom = roomRepository.save(room);
 
-        return ResponseEntity.ok().body(
+        return new ResponseEntity<>(
                 Response.builder()
                         .responseCode(ResponseUtils.SUCCESS_CODE)
                         .responseMessage(ResponseUtils.ROOM_ENTRY_SUCCESS)
@@ -176,7 +178,8 @@ public class RoomServiceImpl implements RoomService{
                                         .uniqueCode(savedRoom.getRoomType().getUniqueCode())
                                         .build()
                         )
-                        .build()
+                        .build(),
+                HttpStatus.CREATED
         );
     }
 
