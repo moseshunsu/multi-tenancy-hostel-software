@@ -97,7 +97,7 @@ public class PayStackServiceImpl implements PayStackService {
             return response;
         } else {
             return InitializePaymentResponse.builder()
-                    .message("Paystack is unable to initialize payment at the moment")
+                    .message("PayStack is unable to initialize payment at the moment")
                     .build();
         }
     }

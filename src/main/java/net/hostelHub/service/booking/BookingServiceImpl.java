@@ -125,10 +125,11 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public ResponseEntity<List<Booking>> listOfBookings(String managerUniqueCode) {
+    public ResponseEntity<List<Booking>> listOfBookings(String uniqueCode) {
         List<Booking> bookingList = bookingRepository.findAll()
                 .stream()
-                .filter(booking -> booking.getUniqueManagerCode().equals(managerUniqueCode))
+                .filter(booking -> booking.getUniqueManagerCode().equals(uniqueCode) ||
+                                   booking.getUniqueOccupantCode().equals(uniqueCode))
                 .toList();
 
         return !bookingList.isEmpty() ? ResponseEntity.ok(bookingList) : ResponseEntity.noContent().build();
@@ -153,7 +154,7 @@ public class BookingServiceImpl implements BookingService {
                     String message = "Congrats, your booking has been approved!";
                     emailService.sendSimpleMail(createEmailDetails(subject, recipient, message));
 
-                    return ResponseEntity.ok(booking);
+                    return ResponseEntity.accepted().body(booking);
                 })
                 .orElseThrow( () -> new NoSuchElementException("No such booking found!!! - " + uniqueBookingNumber));
     }

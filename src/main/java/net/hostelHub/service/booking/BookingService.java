@@ -15,7 +15,7 @@ import java.util.List;
 public interface BookingService {
     ResponseEntity<Response> makeBooking(BookingRequest bookingRequest) throws UserNotFoundException;
     ResponseEntity<List<RoomResponseDto>> fetchAvailableRooms(BookingRequest bookingRequest);
-    ResponseEntity<List<Booking>> listOfBookings(String managerUniqueCode);
+    ResponseEntity<List<Booking>> listOfBookings(String uniqueCode);
     ResponseEntity<?> approveBooking (String uniqueBookingNumber);
     ResponseEntity<InitializePaymentResponse> initializePayment(String uniqueBookingNumber);
     ResponseEntity<PaymentVerificationResponse> paymentVerification(String reference) throws Exception;
