@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="net.hostelHub.service.HostelPropertyServiceTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-09-18T01:53:27" hostname="HUNS-IACADEMY" time="0.633">
+  <properties/>
+  <testcase name="JUnit test for register property method" classname="net.hostelHub.service.HostelPropertyServiceTests" time="0.633"/>
+  <system-out><![CDATA[hostelPropertyRequest = net.hostelHub.dto.properties.HostelPropertyRequest@18d87207
+savedHostelProperty = <201 CREATED Created,Response(responseCode=003, responseMessage=Property successfully added, data=Data(uniqueCode=422630, email=moses@gmail.com, username=moses)),[]>
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
