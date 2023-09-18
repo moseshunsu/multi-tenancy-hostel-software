@@ -17,6 +17,7 @@ import net.hostelHub.utils.School;
 import net.hostelHub.utils.State;
 import net.hostelHub.utils.Type;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -75,7 +76,7 @@ public class HostelPropertyServiceImpl implements HostelPropertyService {
 
         HostelProperty savedProperty = hostelPropertyRepository.save(property);
 
-        return ResponseEntity.ok().body(
+        return new ResponseEntity<>(
                 Response.builder()
                         .responseCode(ResponseUtils.PROPERTY_REGISTER_SUCCESS_CODE)
                         .responseMessage(ResponseUtils.REGISTER_PROPERTY_SUCCESS_MESSAGE)
@@ -86,7 +87,8 @@ public class HostelPropertyServiceImpl implements HostelPropertyService {
                                         .email(fetchedUser.getEmail())
                                         .build()
                         )
-                        .build()
+                        .build(),
+                HttpStatus.CREATED
         );
     }
 
