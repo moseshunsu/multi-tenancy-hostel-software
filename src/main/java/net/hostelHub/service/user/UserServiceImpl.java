@@ -11,6 +11,7 @@ import net.hostelHub.repository.UserRepository;
 import net.hostelHub.utils.ResponseUtils;
 import net.hostelHub.utils.Role;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -76,11 +77,14 @@ public class UserServiceImpl implements UserService {
                 .email(user.getEmail())
                 .build();
 
-        return ResponseEntity.ok(Response.builder()
+        return new ResponseEntity<>(
+                Response.builder()
                 .responseCode(ResponseUtils.SUCCESS_CODE)
                 .responseMessage(ResponseUtils.USER_REGISTRATION_MESSAGE)
                 .data(userData)
-                .build());
+                .build(),
+                HttpStatus.CREATED
+        );
     }
 
     public void changePassword(User user, String newPassword) {

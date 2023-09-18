@@ -1,5 +1,8 @@
 package net.hostelHub.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -27,12 +30,29 @@ import static net.hostelHub.service.user.UserServiceImpl.applicationUrl;
 @RestController
 @RequestMapping("api/v1/users")
 @RequiredArgsConstructor
+@Tag(
+        name = "User Controller REST APIs/Endpoint",
+        description = "This controller includes endpoints which allow users registration, resetting and changing of " +
+                "password"
+)
 public class UserController {
-
     private final UserService userService;
     private final PasswordResetTokenService passwordResetTokenService;
     private final RegistrationCompleteEventListener eventListener;
 
+    @Operation(
+            summary = "This endpoint allows registration of property owners",
+            responses = {
+                    @ApiResponse(
+                            description = "Created",
+                            responseCode = "201"
+                    ),
+                    @ApiResponse(
+                            description = "User Code Exists",
+                            responseCode = "400"
+                    )
+            }
+    )
     @PostMapping("/sign-up")
     public ResponseEntity<Response> registerOccupant(@RequestBody @Valid UserRequest userRequest,
                                                      Role role,
@@ -41,6 +61,19 @@ public class UserController {
         return userService.registerUser(userRequest, Role.OCCUPANT, ResponseUtils.LENGTH_OF_OCCUPANT_CODE, request);
     }
 
+    @Operation(
+            summary = "This endpoint allows registration of occupants",
+            responses = {
+                    @ApiResponse(
+                            description = "Created",
+                            responseCode = "201"
+                    ),
+                    @ApiResponse(
+                            description = "User Code Exists",
+                            responseCode = "400"
+                    )
+            }
+    )
     @PostMapping("/sign-up/managers")
     public ResponseEntity<Response> registerManager(@RequestBody @Valid UserRequest userRequest,
                                                    Role role,
@@ -49,11 +82,29 @@ public class UserController {
         return userService.registerUser(userRequest, Role.MANAGER, ResponseUtils.LENGTH_OF_TENANT_CODE, request);
     }
 
+    @Operation(
+            summary = "This endpoint allows users fetches their details",
+            responses = {
+                    @ApiResponse(
+                            description = "Success",
+                            responseCode = "200"
+                    )
+            }
+    )
     @GetMapping("/{emailOrUsername}")
     public User fetchUser(@PathVariable String emailOrUsername) {
         return userService.fetchUser(emailOrUsername);
     }
 
+    @Operation(
+            summary = "This endpoint allows users make request for password reset",
+            responses = {
+                    @ApiResponse(
+                            description = "Success",
+                            responseCode = "200"
+                    )
+            }
+    )
     @PostMapping("/password-reset-request")
     public String resetPasswordRequest(@RequestBody PasswordRequestUtil passwordRequestUtil,
                                        final HttpServletRequest servletRequest)
@@ -79,6 +130,15 @@ public class UserController {
         return url;
     }
 
+    @Operation(
+            summary = "This endpoint allows users to reset password their password after email verification",
+            responses = {
+                    @ApiResponse(
+                            description = "Success",
+                            responseCode = "200"
+                    )
+            }
+    )
     @PostMapping("/reset-password")
     public String resetPassword(@RequestBody PasswordRequestUtil passwordRequestUtil,
                                 @RequestParam("token") String token){
@@ -94,6 +154,15 @@ public class UserController {
         return "Invalid password reset token";
     }
 
+    @Operation(
+            summary = "This endpoint allow authenticated users to change their password",
+            responses = {
+                    @ApiResponse(
+                            description = "Success",
+                            responseCode = "200"
+                    )
+            }
+    )
     @PostMapping("/change-password")
     public String changePassword(@RequestBody PasswordRequestUtil requestUtil) {
         User user = userService.findByEmail(requestUtil.getEmail()).get();
