@@ -1,5 +1,6 @@
 package net.hostelHub.controller;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ import static net.hostelHub.service.user.UserServiceImpl.applicationUrl;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/verify")
+@Hidden
 public class VerifyTokenController{
 
     private final VerificationTokenService tokenService;
