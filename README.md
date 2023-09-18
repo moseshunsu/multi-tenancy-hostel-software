@@ -115,6 +115,8 @@ This project has a well-documented OpenAPI (Swagger) interface, which can be acc
 - The software enforces strong password verification, including a minimum length of 8 characters, a maximum length of 16 characters, and the inclusion of special characters.
 - Users can easily search for registered hostels in their respective schools and book rooms directly from the site.
 - This software is built on Java 8 features, utilizing streams and lambda expressions.
+- Sample test cases for Quality Assurances as the software was built based on best practices
+- Possible Exceptions that may arise has been catered for in the Application Exception Handler Class
 
 ## Challenging Moments
 
