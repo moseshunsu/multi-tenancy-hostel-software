@@ -25,7 +25,7 @@ import java.io.IOException;
         description = "Endpoints for logging in and requesting refresh tokens"
 )
 public class AuthController {
-    private AuthService authService;
+    private final AuthService authService;
 
     @Operation(
             description = "Login endpoint for users",
