@@ -103,7 +103,7 @@ spring.mail.properties.mail.smtp.starttls.enable=true
 
 ## Usage/Examples
 
-This project has a well-documented OpenAPI (Swagger) interface, which can be accessed [here](https://multi-tenancy-hostel-software-production.up.railway.app/swagger-ui/index.html#/) or [here](https://multi-tenant-hostel-application.onrender.com/swagger-ui/index.html#/). Note that when using the Swagger documentation, make sure select to the server which corresponds to the domain name.
+This project has a well-documented OpenAPI (Swagger) interface, which can be accessed [here](https://multi-tenancy-hostel-software-production.up.railway.app/swagger-ui/index.html#/)
 
 ## Key Highlights / Uniqueness
 

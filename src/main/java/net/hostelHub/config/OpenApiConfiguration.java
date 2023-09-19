@@ -7,7 +7,6 @@ import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.info.License;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
-import io.swagger.v3.oas.annotations.servers.Server;
 
 @OpenAPIDefinition(
         info = @Info(
@@ -24,21 +23,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
                         url = "https://url.com"
                 ),
                 termsOfService = "Terms of service"
-        ),
-        servers = {
-                @Server(
-                        description = "Local ENV",
-                        url = "http://localhost:8080"
-                ),
-                @Server(
-                        description = "Prod ENV",
-                        url = "https://multi-tenant-hostel-application.onrender.com"
-                ),
-                @Server(
-                        description = "Prod ENV",
-                        url = "https://multi-tenancy-hostel-software-production.up.railway.app/"
-                )
-        }
+        )
 )
 @SecurityScheme(
         name = "bearerAuth",
