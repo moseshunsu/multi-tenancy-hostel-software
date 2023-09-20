@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">1.043s</div>
+<div class="counter">1.349s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,7 +79,7 @@
 </thead>
 <tr>
 <td class="success">contextLoads()</td>
-<td class="success">1.043s</td>
+<td class="success">1.349s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -88,8 +88,8 @@
 <h2>Standard output</h2>
 <span class="code">
 <pre>Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
-13:40:22.393 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [net.hostelHub.MultiTenancyHostelSoftwareApplicationTests]: MultiTenancyHostelSoftwareApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-13:40:22.511 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration net.hostelHub.MultiTenancyHostelSoftwareApplication for test class net.hostelHub.MultiTenancyHostelSoftwareApplicationTests
+09:26:28.991 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [net.hostelHub.MultiTenancyHostelSoftwareApplicationTests]: MultiTenancyHostelSoftwareApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+09:26:29.118 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration net.hostelHub.MultiTenancyHostelSoftwareApplication for test class net.hostelHub.MultiTenancyHostelSoftwareApplicationTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -99,25 +99,25 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.1.3)
 
-2023-09-19T13:40:22.989+01:00  INFO 17688 --- [    Test worker] ltiTenancyHostelSoftwareApplicationTests : Starting MultiTenancyHostelSoftwareApplicationTests using Java 20 with PID 17688 (started by Moses.Hunsu in C:\Users\moses.hunsu\JavaProjects\SpringProjects\multi-tenancy-hostel-software)
-2023-09-19T13:40:22.991+01:00  INFO 17688 --- [    Test worker] ltiTenancyHostelSoftwareApplicationTests : No active profile set, falling back to 1 default profile: &quot;default&quot;
-2023-09-19T13:40:23.959+01:00  INFO 17688 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-09-19T13:40:24.169+01:00  INFO 17688 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 201 ms. Found 10 JPA repository interfaces.
-2023-09-19T13:40:24.777+01:00  INFO 17688 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-09-19T13:40:24.853+01:00  INFO 17688 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.7.Final
-2023-09-19T13:40:24.856+01:00  INFO 17688 --- [    Test worker] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
-2023-09-19T13:40:25.039+01:00  INFO 17688 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-19T13:40:25.210+01:00  INFO 17688 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2023-09-19T13:40:25.232+01:00  INFO 17688 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-09-19T13:40:28.898+01:00  INFO 17688 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@474619d9
-2023-09-19T13:40:28.901+01:00  INFO 17688 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-09-19T13:40:29.867+01:00  INFO 17688 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-19T13:40:30.719+01:00  INFO 17688 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-09-19T13:40:53.931+01:00  INFO 17688 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-09-19T13:40:54.400+01:00  INFO 17688 --- [    Test worker] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2023-09-19T13:40:55.458+01:00  WARN 17688 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-09-19T13:40:55.892+01:00  INFO 17688 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1aef48f0, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2ed16651, org.springframework.security.web.context.SecurityContextHolderFilter@78b5b2f9, org.springframework.security.web.header.HeaderWriterFilter@5bdde886, org.springframework.web.filter.CorsFilter@1b34721a, org.springframework.security.web.authentication.logout.LogoutFilter@60e72ced, net.hostelHub.filter.JwtAuthenticationFilter@2e67df05, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@2a384b46, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@24945f50, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@2673ba1f, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@17746fcb, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5c1d1aa6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@39506f12, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@463bdee9, org.springframework.security.web.session.SessionManagementFilter@5563630d, org.springframework.security.web.access.ExceptionTranslationFilter@32f0a9c2, org.springframework.security.web.access.intercept.AuthorizationFilter@53f7759c]
-2023-09-19T13:40:56.337+01:00  INFO 17688 --- [    Test worker] ltiTenancyHostelSoftwareApplicationTests : Started MultiTenancyHostelSoftwareApplicationTests in 33.622 seconds (process running for 35.102)
+2023-09-20T09:26:29.619+01:00  INFO 4652 --- [    Test worker] ltiTenancyHostelSoftwareApplicationTests : Starting MultiTenancyHostelSoftwareApplicationTests using Java 20 with PID 4652 (started by Moses.Hunsu in C:\Users\moses.hunsu\JavaProjects\SpringProjects\multi-tenancy-hostel-software)
+2023-09-20T09:26:29.622+01:00  INFO 4652 --- [    Test worker] ltiTenancyHostelSoftwareApplicationTests : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2023-09-20T09:26:30.705+01:00  INFO 4652 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-20T09:26:31.008+01:00  INFO 4652 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 293 ms. Found 10 JPA repository interfaces.
+2023-09-20T09:26:31.719+01:00  INFO 4652 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-20T09:26:31.776+01:00  INFO 4652 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.7.Final
+2023-09-20T09:26:31.779+01:00  INFO 4652 --- [    Test worker] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2023-09-20T09:26:31.942+01:00  INFO 4652 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-09-20T09:26:32.130+01:00  INFO 4652 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-20T09:26:32.150+01:00  INFO 4652 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-09-20T09:26:36.964+01:00  INFO 4652 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@774013dc
+2023-09-20T09:26:36.969+01:00  INFO 4652 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-09-20T09:26:37.970+01:00  INFO 4652 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-09-20T09:26:39.064+01:00  INFO 4652 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-20T09:27:30.639+01:00  INFO 4652 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-20T09:27:31.642+01:00  INFO 4652 --- [    Test worker] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2023-09-20T09:27:34.102+01:00  WARN 4652 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-20T09:27:34.940+01:00  INFO 4652 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@62f2811, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@74baefb0, org.springframework.security.web.context.SecurityContextHolderFilter@2f67401, org.springframework.security.web.header.HeaderWriterFilter@42cb8174, org.springframework.web.filter.CorsFilter@3a96b5a1, org.springframework.security.web.authentication.logout.LogoutFilter@353ab9e5, net.hostelHub.filter.JwtAuthenticationFilter@6846e4e8, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@7c453a1f, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@1fe8a2fc, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@5aa2168f, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@5ae50044, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7e1321fd, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2131229e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@25b2d26a, org.springframework.security.web.session.SessionManagementFilter@59711ea7, org.springframework.security.web.access.ExceptionTranslationFilter@4d94b0af, org.springframework.security.web.access.intercept.AuthorizationFilter@d9c54cd]
+2023-09-20T09:27:35.871+01:00  INFO 4652 --- [    Test worker] ltiTenancyHostelSoftwareApplicationTests : Started MultiTenancyHostelSoftwareApplicationTests in 66.546 seconds (process running for 68.06)
 </pre>
 </span>
 </div>
@@ -129,7 +129,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.2.1</a> at Sep 19, 2023, 1:41:01 PM</p>
+<a href="http://www.gradle.org">Gradle 8.2.1</a> at Sep 20, 2023, 9:27:46 AM</p>
 </div>
 </div>
 </body>

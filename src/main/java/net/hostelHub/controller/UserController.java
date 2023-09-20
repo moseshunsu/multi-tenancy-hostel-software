@@ -41,7 +41,7 @@ public class UserController {
     private final RegistrationCompleteEventListener eventListener;
 
     @Operation(
-            summary = "This endpoint allows registration of property owners",
+            summary = "This endpoint allows registration of students or occupants",
             responses = {
                     @ApiResponse(
                             description = "Created",
@@ -62,7 +62,7 @@ public class UserController {
     }
 
     @Operation(
-            summary = "This endpoint allows registration of occupants",
+            summary = "This endpoint allows registration of hostel owners or managers",
             responses = {
                     @ApiResponse(
                             description = "Created",

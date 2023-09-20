@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="net.hostelHub.service.HostelPropertyServiceTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-09-19T12:40:57" hostname="HUNS-IACADEMY" time="0.475">
+<testsuite name="net.hostelHub.service.HostelPropertyServiceTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-09-20T08:27:37" hostname="HUNS-IACADEMY" time="1.265">
   <properties/>
-  <testcase name="JUnit test for register property method" classname="net.hostelHub.service.HostelPropertyServiceTests" time="0.475"/>
-  <system-out><![CDATA[hostelPropertyRequest = net.hostelHub.dto.properties.HostelPropertyRequest@57bfaa41
-savedHostelProperty = <201 CREATED Created,Response(responseCode=003, responseMessage=Property successfully added, data=Data(uniqueCode=223226, email=moses@gmail.com, username=moses)),[]>
+  <testcase name="JUnit test for register property method" classname="net.hostelHub.service.HostelPropertyServiceTests" time="1.265"/>
+  <system-out><![CDATA[hostelPropertyRequest = net.hostelHub.dto.properties.HostelPropertyRequest@4a45042a
+savedHostelProperty = <201 CREATED Created,Response(responseCode=003, responseMessage=Property successfully added, data=Data(uniqueCode=754731, email=moses@gmail.com, username=moses)),[]>
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
